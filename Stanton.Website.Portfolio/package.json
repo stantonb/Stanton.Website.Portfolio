@@ -1,0 +1,9 @@
+{
+  "name": "stanton.website.portfolio",
+  "version": "0.0.0",
+  "description": "Stanton.Website.Portfolio",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  }
+}
