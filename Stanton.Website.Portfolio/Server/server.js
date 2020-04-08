@@ -1,9 +1,10 @@
-var mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
+//Set up the initial connection and specify the DB to connect to.
 mongoose
-    .connect('mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb', { useNewUrlParser: true })
+    .connect("mongodb://localhost/Stanton_Website_Portfolio", { useNewUrlParser: true })
     .catch(e => {
-        console.error('Connection error', e.message)
-    })
+        console.error("Connection error", e.message)
+    });
 
-   module.exports = mongoose.connection
+module.exports = mongoose.connection;

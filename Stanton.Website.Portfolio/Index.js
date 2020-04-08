@@ -1,19 +1,24 @@
-var express = require("express")
-var bodyParser = require("body-parser")
-var cors = require("cors")
-var db = require("./server.js")
-var app = express()
-var port = process.env.PORT || 1337;
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const app = express();
+const port = process.env.PORT || 1337;
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
-app.use(bodyParser.json())
+//Connect to the DB
+const db = require("./Server/server.js");
 
-db.on("error", console.error.bind(console, "MongoDB connection error:"))
+db.once("open", function () {
+    console.log("Connected to Stanton_Website_Portfolio");
+});
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+//Add all the API routes
+const companyRouter = require("./Routes/CompanyRouter");
+app.use("/api", companyRouter); 
 
 
-app.get("/", (req, res) => {
-    res.send("Hello World! Test")
-})
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.json());
 
-app.listen(port, () => console.log(`Server running on port ${port}`))
+app.listen(port, () => console.log(`Server running on port ${port}`));
